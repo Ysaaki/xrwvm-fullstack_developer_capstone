@@ -111,27 +111,25 @@ def get_dealerships(request, state="All"):
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 def get_dealer_reviews(request, dealer_id):
-    # if dealer id has been provided
-    if(dealer_id):
-        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
-        reviews = get_request(endpoint)
-        for review_detail in reviews:
-            response = analyze_review_sentiments(review_detail['review'])
-            print(response)
-            review_detail['sentiment'] = response['sentiment']
-        return JsonResponse({"status":200,"reviews":reviews})
+    if dealer_id:
+        endpoint = f"/fetchDealer/{dealer_id}"
+        dealer_detail = get_request(endpoint)
+        
+        # Guard check: if MongoDB returned a single element wrapped inside a list, flatten it
+        if isinstance(dealer_detail, list) and len(dealer_detail) > 0:
+            dealer_detail = dealer_detail[0]
+            
+        return JsonResponse({"status": 200, "dealer": dealer_detail})
     else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
 # Create a `get_dealer_details` view to render the dealer details
 def get_dealer_details(request, dealer_id):
-    if(dealer_id):
-        endpoint = "/fetchDealer/"+str(dealer_id)
-        dealership = get_request(endpoint)
-        return JsonResponse({"status":200,"dealer":dealership})
-    else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
+    if dealer_id:
+        endpoint = f"/fetchDealer/{dealer_id}"
+        dealer_detail = get_request(endpoint)
+        return JsonResponse({"status": 200, "dealer": dealer_detail})
 
 
 # Create a `add_review` view to submit a review

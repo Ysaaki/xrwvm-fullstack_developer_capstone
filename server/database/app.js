@@ -65,16 +65,21 @@ app.get('/fetchDealers', async (req, res) => {
     }
 });
 
-// Express route to fetch Dealers by a particular state
-app.get('/fetchDealers/:state', async (req, res) => {
-    try{
-      const document = await Dealerships.find({state: req.params.state});
-      res.json(document)
-    } catch {
-      res.status(500).json({error: 'Error fetching dealership by state'})
+// Express route to fetch dealer by a particular id
+app.get('/fetchDealer/:id', async (req, res) => {
+  try {
+    // Convert the parameter string into a base-10 integer
+    const dealerId = parseInt(req.params.id, 10);
+    
+    const document = await Dealerships.findOne({ id: dealerId });
+    if (!document) {
+      return res.status(404).json({ error: 'Dealership not found' });
     }
+    res.json(document);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching dealership by id' });
+  }
 });
-
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
     try{
