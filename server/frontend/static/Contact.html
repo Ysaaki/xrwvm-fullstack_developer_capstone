@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Dealerships</title>
+  
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="card" style="width: 80%; margin: auto; margin-top: 5%;">
+    
+    <div class="banner" name="contact-header" style="padding: 20px; border-bottom: 1px solid #dfdfdf;">
+      <h1>Contact Us</h1>
+      <p class="text-muted">Have questions about a vehicle or want to schedule a test drive? Reach out to our team.</p>
+    </div>
+
+    <div class="card-body" style="padding: 30px;">
+      <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+        
+        <div style="flex: 1; min-width: 280px;">
+          <h3 class="mb-4">Best Cars Dealership</h3>
+          <p><strong>Address:</strong> 123 Showroom Blvd, Detroit, MI 48201</p>
+          <p><strong>Phone:</strong> +1 (555) 019-2831</p>
+          <p><strong>Email:</strong> support@bestcarsdealership.com</p>
+          
+          <hr class="my-4">
+          
+          <h5>Showroom Hours</h5>
+          <p class="mb-1">Monday - Friday: 9:00 AM - 7:00 PM</p>
+          <p class="mb-1">Saturday: 10:00 AM - 5:00 PM</p>
+          <p>Sunday: Closed</p>
+        </div>
+
+        <div style="flex: 1.5; min-width: 320px;">
+          <h4 class="mb-3">Send us a Message</h4>
+          <form>
+            <div class="mb-3">
+              <label for="clientName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="clientName" placeholder="John Doe" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="clientEmail" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="clientEmail" placeholder="name@example.com" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="clientMessage" class="form-label">Message / Inquiry</label>
+              <textarea class="form-control" id="clientMessage" rows="4" placeholder="Tell us which vehicle you are looking at..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn text-white w-100" style="background-color: darkturquoise; font-weight: bold;">
+              Submit Message
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+
+</body>
+</html>
