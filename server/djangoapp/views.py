@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import CarMake, CarModel
 from .populate import initiate
+from .restapis import get_request, post_review, analyze_review_sentiments
 
 
 # Get an instance of a logger
