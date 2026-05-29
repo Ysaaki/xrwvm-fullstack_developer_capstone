@@ -65,10 +65,11 @@ app.get('/fetchDealers', async (req, res) => {
     }
 });
 
+
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
   try {
-    // Convert the parameter string into a base-10 integer
+    // Force type conversion to an integer to match the MongoDB numeric ID types
     const dealerId = parseInt(req.params.id, 10);
     
     const document = await Dealerships.findOne({ id: dealerId });
@@ -80,19 +81,6 @@ app.get('/fetchDealer/:id', async (req, res) => {
     res.status(500).json({ error: 'Error fetching dealership by id' });
   }
 });
-// Express route to fetch dealer by a particular id
-app.get('/fetchDealer/:id', async (req, res) => {
-    try{
-      const document = await Dealerships.findOne({id : req.params.id});
-      if(!documents) {
-        return res.status(404).json({error: 'Dealership not found'})
-      }
-      res.json(document)
-    } catch {
-      res.status(500).json({error: 'Error fetching dealerrship by id'})
-    }
-});
-
 
 //Express route to insert review
 app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {

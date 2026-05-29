@@ -9,7 +9,7 @@ import review_icon from "../assets/reviewbutton.png";
 import Header from '../Header/Header';
 
 const Dealer = () => {
-  const [dealer, setDealer] = useState(null); // Initialized as null to verify when data has arrived
+  const [dealer, setDealer] = useState({});
   const [reviews, setReviews] = useState([]);
   const [unreviewed, setUnreviewed] = useState(false);
   const [postReview, setPostReview] = useState(<></>);
@@ -22,22 +22,22 @@ const Dealer = () => {
   let reviews_url = root_url + `djangoapp/reviews/dealer/${id}`;
   let post_review = root_url + `postreview/${id}`;
   
-const get_dealer = async () => {
+  const get_dealer = async () => {
     const res = await fetch(dealer_url, {
       method: "GET"
     });
     const retobj = await res.json();
     
     if (retobj.status === 200 && retobj.dealer) {
-      // If the backend returned an array wrapped inside the 'dealer' key, grab the first element
+      // Fix: If retobj.dealer is an array list container, extract object index 0
       if (Array.isArray(retobj.dealer)) {
         setDealer(retobj.dealer[0]);
       } else {
-        // Otherwise, set the flat object directly
         setDealer(retobj.dealer);
       }
     }
   };
+
   const get_reviews = async () => {
     const res = await fetch(reviews_url, {
       method: "GET"
@@ -73,35 +73,23 @@ const get_dealer = async () => {
   return (
     <div style={{ margin: "20px" }}>
       <Header />
-      
-      {/* Conditional Header Rendering to prevent ", , Zip - ," placement anomalies */}
-      {dealer ? (
-        <div style={{ marginTop: "10px" }}>
-          <h1 style={{ color: "darkblue" }}>{dealer.full_name || dealer.name}{postReview}</h1>
-          <h4 style={{ color: "grey" }}>
-            {dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}
-          </h4>
-        </div>
-      ) : (
-        <div style={{ marginTop: "10px" }}>
-          <h4 style={{ color: "grey" }}>Loading Dealership Information...</h4>
-        </div>
-      )}
-
-      {/* Reviews Panel Layout Layer */}
+      <div style={{ marginTop: "10px" }}>
+        <h1 style={{ color: "grey" }}>{dealer.full_name || dealer.name}{postReview}</h1>
+        <h4 style={{ color: "grey" }}>
+          {dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}
+        </h4>
+      </div>
       <div className="reviews_panel">
         {reviews.length === 0 && unreviewed === false ? (
-          <span className="loading-text">Loading Reviews....</span>
+          <span>Loading Reviews....</span>
         ) : unreviewed === true ? (
-          <div className="no-reviews">No reviews yet!</div>
+          <div>No reviews yet! </div>
         ) : (
           reviews.map((review, index) => (
             <div key={index} className='review_panel'>
               <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment' />
-              <div className='review'>"{review.review}"</div>
-              <div className="reviewer">
-                — {review.name} {review.car_make} {review.car_model} {review.car_year ? `(${review.car_year})` : ''}
-              </div>
+              <div className='review'>{review.review}</div>
+              <div className="reviewer">{review.name} {review.car_make} {review.car_model} {review.car_year}</div>
             </div>
           ))
         )}
