@@ -13,7 +13,7 @@ sentiment_analyzer_url = os.getenv(
 
 def get_request(endpoint, **kwargs):
     request_url = backend_url + endpoint
-    print("GET from {} ".format(request_url))
+    print(f"GET from {request_url} ")
     try:
         response = requests.get(request_url, params=kwargs)
         return response.json()
@@ -23,7 +23,9 @@ def get_request(endpoint, **kwargs):
 
 
 def analyze_review_sentiments(text):
-    request_url = sentiment_analyzer_url + "analyze/" + text
+    request_url = (
+        f"{sentiment_analyzer_url}analyze/{text}"
+    )
     try:
         response = requests.get(request_url)
         return response.json()
@@ -35,7 +37,7 @@ def analyze_review_sentiments(text):
 
 def post_review(endpoint, json_data):
     request_url = backend_url + endpoint
-    print("POST to {} ".format(request_url))
+    print(f"POST to {request_url} ")
     try:
         response = requests.post(request_url, json=json_data)
         return response.json()

@@ -1,0 +1,10 @@
+[flake8]
+ignore = E501
+exclude =
+    .venv,
+    venv,
+    env,
+    node_modules,
+    frontend/node_modules,
+    **/migrations/*,
+    **/settings.py
