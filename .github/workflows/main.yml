@@ -48,5 +48,5 @@ jobs:
 
     - name: Run Linter
       run: |
-        find ./server/database -name "*.js" -exec jshint {} +
-        echo "Linted all the js files successfully"
+        flake8 . --exclude=.venv,venv,env,node_modules,frontend/node_modules
+        echo "Linted all the python files successfully"
