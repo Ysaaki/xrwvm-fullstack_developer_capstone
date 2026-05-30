@@ -2,8 +2,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import JsonResponse
 
-import json
-from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 import logging
 import json
@@ -121,7 +119,6 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status": 200, "dealer": dealer_detail})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
-
 
 
 def add_review(request):
