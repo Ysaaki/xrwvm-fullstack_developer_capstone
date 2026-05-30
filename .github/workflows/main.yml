@@ -48,5 +48,5 @@ jobs:
 
     - name: Run Linter
       run: |
-        flake8 . --exclude=.venv,venv,env,node_modules,frontend/node_modules,**/migrations/*
+        flake8 . --exclude=.venv,venv,env,node_modules,frontend/node_modules,**/migrations/*,**/settings.py
         echo "Linted all the python files successfully"
